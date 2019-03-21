@@ -14,9 +14,11 @@ import { TablesComponent } from './components/site/tables/tables.component';
 
 import { RouterModule, Routes } from '@angular/router';
 import { registerContentQuery } from '@angular/core/src/render3/instructions';
+import { EmployeesComponent } from './components/site/employees/employees.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'employees', component: EmployeesComponent },
   { path: 'home', component: HomeComponent},
   { path: 'register', component : RegisterComponent},
   { path: 'charts', component : ChartsComponent},
@@ -39,7 +41,8 @@ const appRoutes: Routes = [
     FormsComponent,
     LoginComponent,
     RegisterComponent,
-    TablesComponent
+    TablesComponent,
+    EmployeesComponent
   ],
   imports: [
     BrowserModule,
