@@ -17,11 +17,11 @@ export class EmployeesComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http
-      .get('assets/data/data.json')
-      .subscribe((persons: any) => {
-        this.persons = persons;
-        console.log(this.persons);
-      });
+    // this.http
+    //   .get('assets/data/data.json')
+    //   .subscribe((persons: any) => {
+    //     this.persons = persons;
+    //     console.log(this.persons);
+    //   });
   }
 }

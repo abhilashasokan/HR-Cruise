@@ -11,6 +11,7 @@ import { FormsComponent } from './components/site/forms/forms.component';
 import { LoginComponent } from './components/site/login/login.component';
 import { RegisterComponent } from './components/site/register/register.component';
 import { TablesComponent } from './components/site/tables/tables.component';
+import { HttpClientModule } from '@angular/common/http';
 
 import { RouterModule, Routes } from '@angular/router';
 import { registerContentQuery } from '@angular/core/src/render3/instructions';
@@ -46,6 +47,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [],
