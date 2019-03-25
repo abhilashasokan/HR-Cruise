@@ -11,15 +11,29 @@ import { FormsComponent } from './components/site/forms/forms.component';
 import { LoginComponent } from './components/site/login/login.component';
 import { RegisterComponent } from './components/site/register/register.component';
 import { TablesComponent } from './components/site/tables/tables.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AgGridModule } from 'ag-grid-angular';
+
 
 import { RouterModule, Routes } from '@angular/router';
 import { registerContentQuery } from '@angular/core/src/render3/instructions';
 import { EmployeesComponent } from './components/site/employees/employees.component';
+import { ManageComponent } from './components/site/employees/manage/manage.component';
+import { BreadcrumbsComponent } from './components/layout/breadcrumbs/breadcrumbs.component';
+import { SalutationComponent } from './components/site/partial/salutation/salutation.component';
+import { DesignationComponent } from './components/site/partial/designation/designation.component';
+
+import { EmployeesService } from './services/employees.service';
+import { ApiInterceptor } from './services/api.interceptor';
+import { ListActionsComponent } from './components/site/employees/list-actions/list-actions.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'employees', component: EmployeesComponent },
+  { path: 'employees/manage', component: ManageComponent },
+  { path: 'employees/manage:id?', component: ManageComponent },
   { path: 'home', component: HomeComponent},
   { path: 'register', component : RegisterComponent},
   { path: 'charts', component : ChartsComponent},
@@ -43,14 +57,29 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     TablesComponent,
-    EmployeesComponent
+    EmployeesComponent,
+    ManageComponent,
+    BreadcrumbsComponent,
+    ListActionsComponent,
+    SalutationComponent,
+    DesignationComponent
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes)
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes),
+    AgGridModule.withComponents([ListActionsComponent])
   ],
-  providers: [],
+  providers: [
+    EmployeesService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

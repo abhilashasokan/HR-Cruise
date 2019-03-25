@@ -1,0 +1,131 @@
+<app-breadcrumbs></app-breadcrumbs>
+{{ employees | json }}
+<section class="forms"> 
+  <div class="container-fluid">
+    <!-- Page Header-->
+    <header>
+      <h1 class="h3 display">Employees </h1>
+    </header>
+    <form *ngIf="employees">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header d-flex align-items-center">
+              <h4>Personal details</h4>
+            </div>
+            <div class="card-body">
+              <p>Lorem ipsum dolor sit amet consectetur.</p>
+              <div class="form-group">
+                <label>Employee Code</label>
+                <div class="form-inline">
+                  <div class="form-group mr-1">
+                    <input type="text" [(ngModel)]="employees && employees.employeeId" placeholder="Employee Code" 
+                    name="employeecode" class="form-control" #employeecode="ngModel">
+                  </div>
+                  <div class="form-group mr-1">
+                    <input type="text" [(ngModel)]="employees && employees.personalDetails.dob"
+                    placeholder="Employee date of birth" name="employeedob" class="form-control"
+                    #employeedob="ngModel">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Employee Name</label>
+                <div class="form-inline">
+                  <div class="form-group mr-1">
+                    <app-salutation [salutation]="employees && employees.name.salutation"></app-salutation>
+                  </div>
+                  <div class="form-group mr-1">
+                    <input type="text" placeholder="First Name" name="firstName" class="form-control"
+                    [(ngModel)]="employees && employees.name.firstName" #firstName="ngModel">
+                  </div>
+                  <div class="form-group mr-1">
+                    <input type="text" placeholder="Last Name" name="lastName" class="form-control"
+                    [(ngModel)]="employees && employees.name.lastName" #lastName="ngModel">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Fathers Name</label>
+                <div class="form-inline">
+                  <div class="form-group mr-1">
+                    <app-salutation [salutation]="employees && employees.personalDetails.nameOfFather.salutation"></app-salutation>
+                  </div>
+                  <div class="form-group mr-1">
+                    <input type="text" placeholder="First Name" name="fathersFirstName" class="form-control"
+                    [(ngModel)]="employees && employees.personalDetails.nameOfFather.firstName" #fathersFirstName="ngModel">
+                  </div>
+                  <div class="form-group mr-1">
+                    <input type="text" placeholder="Last Name" name="fathersLastName" class="form-control"
+                    [(ngModel)]="employees && employees.personalDetails.nameOfFather.lastName" #fathersLastName="ngModel">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-header d-flex align-items-center">
+              <h4>Address</h4>
+            </div>
+            <div class="card-body address-padding-bottom">
+              <input class="mt-1 form-control" placeholder="Street address 1" type="text" name="address1"
+              [(ngModel)]="employees && employees.address.streetAddress1" #address1="ngModel">
+              <input class="mt-1 form-control" placeholder="Street address 2" type="text" name="address2"
+              [(ngModel)]="employees && employees.address.streetAddress2" #address2="ngModel">
+              <input class="mt-1 form-control" placeholder="City" type="text" name="city"
+              [(ngModel)]="employees && employees.address.city" #city="ngModel">
+              <input class="mt-1 form-control" placeholder="State" type="text" name="state"
+              [(ngModel)]="employees && employees.address.state" #state="ngModel">
+              <select name="employeeSalutation" class="mt-1 form-control">
+                <option>Select</option>
+              </select>
+              <input class="mt-1 form-control" placeholder="Pin code" type="text" name="pincode"
+              [(ngModel)]="employees && employees.address.pinCode" #pincode="ngModel">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-header d-flex align-items-center">
+              <h4>Employment details</h4>
+            </div>
+            <div class="card-body">
+              <app-designation [designation]="employees && employees.employmentDetails.designation"></app-designation>
+              <input class="mt-1 form-control" placeholder="Date of joining" type="text" name="dateOfJoining"
+              [(ngModel)]="employees && employees.employmentDetails.dateOfJoining" #dateOfJoining="ngModel">
+              <input class="mt-1 form-control" placeholder="Bank name" type="text"  name="bankName"
+              [(ngModel)]="employees && employees.employmentDetails.compensationDetails.bankName" #bankName="ngModel">
+              <input class="mt-1 form-control" placeholder="Account number" type="text"  name="accountNumber"
+              [(ngModel)]="employees && employees.employmentDetails.compensationDetails.accountNumber" #accountNumber="ngModel">
+              <input class="mt-1 form-control" placeholder="Leave balance" type="text"  name="leaveBalance"
+              [(ngModel)]="employees && employees.leaveDetails.leaveBalance" #leaveBalance="ngModel">
+              <input class="mt-1 form-control" placeholder="Leave taken" type="text"  name="leaveTaken"
+              [(ngModel)]="employees && employees.leaveDetails.leaveTaken" #leaveTaken="ngModel">
+              <input class="mt-1 form-control" placeholder="PAN" type="text"  name="pan"
+              [(ngModel)]="employees && employees.personalDetails.pan" #pan="ngModel">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+              <div class="card-header d-flex align-items-center">
+                <h4>Compensation details</h4>
+              </div>
+              <div class="card-body">
+                <input class="mt-1 form-control" placeholder="Date of joining" type="text">
+                <input class="mt-1 form-control" placeholder="Bank name" type="text">
+                <input class="mt-1 form-control" placeholder="Account number" type="text">
+                <input class="mt-1 form-control" placeholder="Leave balance" type="text">
+                <input class="mt-1 form-control" placeholder="Leave taken" type="text">
+                <input class="mt-1 form-control" placeholder="PAN" type="text">
+              </div>
+            </div>
+          </div>
+      </div>
+    </form>
+  </div>
+</section>
