@@ -1,4 +1,5 @@
-<select name="employeeSalutation" class="form-control">
+<label for="designation">Designation</label>
+<select name="employeeDesignation" class="form-control" id="employeeDesignation">
   <option>Select</option>
   <option *ngFor="let opt of designationCollection" [value]="opt.key" [selected]="opt.key === designation">
     {{opt.title}}

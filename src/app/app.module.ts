@@ -22,6 +22,8 @@ import { ManageComponent } from './components/site/employees/manage/manage.compo
 import { BreadcrumbsComponent } from './components/layout/breadcrumbs/breadcrumbs.component';
 import { SalutationComponent } from './components/site/partial/salutation/salutation.component';
 import { DesignationComponent } from './components/site/partial/designation/designation.component';
+import { StateComponent } from './components/site/partial/state/state.component';
+import { CountriesComponent } from './components/site/partial/countries/countries.component';
 
 import { EmployeesService } from './services/employees.service';
 import { ApiInterceptor } from './services/api.interceptor';
@@ -62,10 +64,12 @@ const appRoutes: Routes = [
     BreadcrumbsComponent,
     ListActionsComponent,
     SalutationComponent,
-    DesignationComponent
+    DesignationComponent,
+    StateComponent,
+    CountriesComponent
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,

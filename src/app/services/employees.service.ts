@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Employee } from '../components/site/model/employee';
+import { EmployeeListItem } from '../components/site/model/EmployeeListItem';
+import { environment } from './../../environments/environment';
 
 
 @Injectable({
@@ -8,17 +9,17 @@ import { Employee } from '../components/site/model/employee';
 })
 export class EmployeesService {
 
-  ROOT_URL = 'http://localhost:8090';
-  listData: Employee[] = [];
-  employee: Employee;
+  apiUrl = environment.apiUrl;
+  listData: EmployeeListItem[] = [];
+  employee: EmployeeListItem;
   constructor(private http: HttpClient) { }
 
   getListInformation() {
-    return this.http.get(`${this.ROOT_URL}/employees/`);
+    return this.http.get(`${this.apiUrl}/employees/`);
   }
 
   getEmployeeInformation(employeeId: string) {
-    return this.http.get(`${this.ROOT_URL}/employees/${employeeId}`);
+    return this.http.get(`${this.apiUrl}/employees/${employeeId}`);
   }
 
   prepareListData(data) {
