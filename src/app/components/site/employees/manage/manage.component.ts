@@ -16,7 +16,7 @@ export class ManageComponent implements OnInit, OnDestroy {
   date = new Date();
   currentEmployees: Employee = {
     employeeId: '',
-    joiningDate: new Date(),
+    joiningDate: undefined,
     name: {
       firstName: '',
       lastName: '',
@@ -26,19 +26,19 @@ export class ManageComponent implements OnInit, OnDestroy {
       streetAddress1: '',
       streetAddress2: '',
       city: '',
-      state: '',
+      state: 'KL',
       country: '',
       pinCode: ''
     },
     employmentDetails: {
       designation: '',
-      dateOfJoining: new Date(),
-      dateOfReleaving: new Date(),
+      dateOfJoining: undefined,
+      dateOfReleaving: undefined,
       compensationDetails: {
         pan: '',
         bankName: '',
         accountNumber: undefined,
-        payDate: new Date(),
+        payDate: undefined,
         basicPay: undefined,
         hra: undefined,
         conveyance: undefined,
@@ -50,7 +50,7 @@ export class ManageComponent implements OnInit, OnDestroy {
       }
     },
     personalDetails: {
-      dob: new Date(),
+      dob: undefined,
       pan: '',
       nameOfFather: {
         firstName: '',
@@ -70,9 +70,9 @@ export class ManageComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.employeeId = this.route.snapshot.queryParams["employeeId"];
+    this.employeeId = this.route.snapshot.queryParams['employeeId'];
     const employee$ = this.employees.getEmployeeInformation(this.employeeId);
-    this.employeeSubscription = employee$.subscribe(data => {
+    this.employeeSubscription = employee$.subscribe((data: Employee) => {
       if (data) {
         this.currentEmployees = data;
       }
@@ -81,10 +81,28 @@ export class ManageComponent implements OnInit, OnDestroy {
 
   saveEmployee() {
     console.log(this.currentEmployees);
+    this.employees.putEmployeeInformation(this.currentEmployees, this.employeeId);
   }
 
   backToList() {
-    this.router.navigate(["employees"]);
+    this.router.navigate(['employees']);
+  }
+
+  stateChange($event) {
+    this.currentEmployees.address.state = $event;
+  }
+
+  countryChange($event) {
+    this.currentEmployees.address.country = $event;
+  }
+
+  salutationChange($event) {
+    console.log($event);
+    if ($event.control === 'EmployeeSalutation') {
+      this.currentEmployees.name.salutation = $event.value;
+    } else {
+      this.currentEmployees.personalDetails.nameOfFather.salutation = $event.value;
+    }
   }
 
   ngOnDestroy() {

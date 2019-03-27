@@ -1,4 +1,5 @@
 export interface EmployeeListItem {
+    id: string;
     employeeId: string;
     fullname: string;
     joiningdate: Date;

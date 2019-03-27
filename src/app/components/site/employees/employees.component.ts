@@ -15,13 +15,13 @@ import { ListActionsComponent } from './list-actions/list-actions.component';
 export class EmployeesComponent implements OnInit {
   // dtTrigger: Subject = new Subject();
   persons: Person[] = [];
-  private columnDefs;
-  private rowSelection;
-  private rowData: [] = [];
-  private gridSubscription: Subscription;
-  private frameworkComponents;
+  columnDefs;
+  rowSelection;
+  rowData: any[] = [];
+  gridSubscription: Subscription;
+  frameworkComponents;
 
-  constructor(private http: HttpClient, private employees: EmployeesService) {
+  constructor(http: HttpClient, private employees: EmployeesService) {
     this.columnDefs = [
       {
         headerName: 'Employee ID',
@@ -67,10 +67,11 @@ export class EmployeesComponent implements OnInit {
     this.frameworkComponents = {
       ListActionsComponent: ListActionsComponent
     };
-    this.getRowHeight = function(params) {
-      return 35;
-    };
   }
+
+  getRowHeight = function(params) {
+    return 35;
+  };
 
   ngOnInit() {}
 

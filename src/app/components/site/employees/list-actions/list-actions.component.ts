@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ICellRendererAngularComp } from "ag-grid-angular";
+import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -8,7 +8,13 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./list-actions.component.css']
 })
 export class ListActionsComponent implements ICellRendererAngularComp {
-    public params: any;
+
+    params;
+
+    refresh(params: any): boolean {
+        return true;
+    }
+
     constructor(private router: Router) {
 
     }
@@ -17,6 +23,6 @@ export class ListActionsComponent implements ICellRendererAngularComp {
     }
 
     public invokeParentMethod() {
-        this.router.navigate(['employees/manage'], { queryParams: { employeeId: this.params.data.Id} });
+        this.router.navigate(['employees/manage'], { queryParams: { employeeId: this.params.data.Id } });
     }
 }

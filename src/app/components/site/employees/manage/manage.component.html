@@ -1,13 +1,12 @@
 <app-breadcrumbs></app-breadcrumbs>
-YOY {{ currentEmployees | json }}
 <section class="forms">
   <div class="container-fluid">
     <!-- Page Header-->
     <header>
       <h1 class="h3 display">Employees </h1>
       <div style="float: right; margin-top: -40px">
-        <button class="btn btn-primary mr-1" (click)="saveEmployee()">Save</button>
-        <button class="btn btn-warning" (click)="backToList()">Back</button>
+        <button class="btn btn-warning mr-1" (click)="backToList()">Back</button>
+        <button class="btn btn-primary" (click)="saveEmployee()">Save</button>        
       </div>
     </header>
     <form>
@@ -27,8 +26,9 @@ YOY {{ currentEmployees | json }}
                       placeholder="Employee Code" name="employeecode" class="form-control" #employeecode="ngModel">
                   </div>
                   <div class="form-group mr-1">
-                    <input type="text" [(ngModel)]="currentEmployees.personalDetails.dob"
-                      placeholder="Employee date of birth" name="employeedob" class="form-control" #employeedob="ngModel">
+                    <input type="text" [(ngModel)]="currentEmployees.personalDetails.dob" 
+                      placeholder="Employee date of birth" name="employeedob" class="form-control" 
+                      #employeedob="ngModel">
                   </div>
                 </div>
               </div>
@@ -36,7 +36,10 @@ YOY {{ currentEmployees | json }}
                 <label>Employee Name</label>
                 <div class="form-inline">
                   <div class="form-group mr-1">
-                    <app-salutation [salutation]="currentEmployees.name.salutation"></app-salutation>
+                    <app-salutation 
+                    control="EmployeeSalutation" 
+                    [salutation]="currentEmployees.name.salutation" 
+                    (salutationChange)="salutationChange($event)"></app-salutation>
                   </div>
                   <div class="form-group mr-1">
                     <input type="text" placeholder="First Name" name="firstName" class="form-control"
@@ -47,13 +50,15 @@ YOY {{ currentEmployees | json }}
                       [(ngModel)]="currentEmployees.name.lastName" #lastName="ngModel">
                   </div>
                 </div>
-              </div>
+              </div> 
               <div class="form-group">
                 <label>Fathers Name</label>
                 <div class="form-inline">
                   <div class="form-group mr-1">
                     <app-salutation
-                      [salutation]="currentEmployees.personalDetails.nameOfFather.salutation">
+                      [salutation]="currentEmployees.personalDetails.nameOfFather.salutation" 
+                      control="EmployeeFatherSalutation"
+                      (salutationChange)="salutationChange($event)">
                     </app-salutation>
                   </div>
                   <div class="form-group mr-1">
@@ -126,8 +131,8 @@ YOY {{ currentEmployees | json }}
               <label for="address2">City</label>
               <input class="mt-1 form-control" placeholder="City" type="text" name="city" id="city"
                 [(ngModel)]="currentEmployees.address.city" #city="ngModel">
-              <app-countries></app-countries>
-              <app-state></app-state>
+              <app-countries [country]="currentEmployees.address.state" (countryChange)="countryChange($event)"></app-countries>
+              <app-state [state]="currentEmployees.address.state" (stateChange)="stateChange($event)"></app-state>
               <label for="pincode">Pin Code</label>
               <input class="mt-1 form-control" placeholder="Pin code" type="text" name="pincode" id="pincode"
                 [(ngModel)]="currentEmployees.address.pinCode" #pincode="ngModel">

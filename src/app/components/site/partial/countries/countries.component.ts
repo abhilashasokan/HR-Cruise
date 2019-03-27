@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 
@@ -9,6 +9,8 @@ import { environment } from '../../../../../environments/environment';
 })
 
 export class CountriesComponent implements OnInit {
+  @Input('country') country;
+  @Output() countryChange: EventEmitter<String> = new EventEmitter<String>();
   apiUrl = environment.apiUrl;
   countries$;
   constructor(private http: HttpClient) { }
@@ -16,5 +18,9 @@ export class CountriesComponent implements OnInit {
   async ngOnInit() {
     this.countries$ = (await this.http.get(`${this.apiUrl}/countries/`));
   }
+  onModelChange(value: string) {
+    this.countryChange.emit(value);
+  }
+
 
 }

@@ -26,7 +26,7 @@ export class EmployeesService {
     this.listData = [];
     for (const item of data) {
       this.employee = {
-        Id: item.id,
+        id: item.id,
         employeeId: item.employeeId,
         fullname: `${item.name.salutation}  ${item.name.firstName} ${item.name.lastName}`,
         joiningdate: item.employmentDetails.dateOfJoining,
@@ -38,5 +38,13 @@ export class EmployeesService {
       this.listData.push(this.employee);
     }
     return this.listData;
+  }
+
+  putEmployeeInformation(data, id) {
+    if (id) {
+      return this.http.put(`${this.apiUrl}/employees/${id}`, JSON.stringify(data)).subscribe();
+    } else {
+      return this.http.post(`${this.apiUrl}/employees`, data).subscribe();
+    }
   }
 }

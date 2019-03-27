@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-salutation',
@@ -8,6 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 export class SalutationComponent implements OnInit {
 
   @Input('salutation') salutation;
+  @Input('control') control;
+  @Output() salutationChange: EventEmitter<{}> = new EventEmitter<{}>();
+
   SalutationCollection = [
     {'key': 'Mr', 'title': 'Mr.'},
     {'key': 'Mrs', 'title': 'Mrs.'},
@@ -16,5 +19,10 @@ export class SalutationComponent implements OnInit {
   constructor() { }
   ngOnInit() {
   }
+
+  onModelChange(value: string) {
+    this.salutationChange.emit({ value, control: this.control });
+  }
+
 
 }

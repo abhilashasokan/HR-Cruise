@@ -1,5 +1,6 @@
 <label for="employeeState">State</label>
-<select name="employeeStates" id="employeeState" class="mt-1 form-control" *ngIf="states$ | async as states">
+<select name="employeeStates" [(ngModel)]="state" #employeeState="ngModel" (ngModelChange)="onModelChange($event)"
+ngControl="employeeState" id="employeeState" class="mt-1 form-control" *ngIf="states$ | async as states">
   <option>Select</option>
   <option *ngFor="let opt of states" [value]="opt.key" [selected]="opt.key === state">
     {{opt.name}}
